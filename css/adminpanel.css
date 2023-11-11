@@ -367,7 +367,7 @@
 
 
 /* CARDVIEW */
-/* .dashboard-card1 {
+.dashboard-card1 {
     display: flex;
     flex-wrap: wrap;
 }
@@ -377,12 +377,12 @@
     flex-wrap: wrap;
 } */
 
-/* .dashboard-card3 {
+.dashboard-card3 {
     display: flex;
     flex-wrap: wrap;
-} */
+}
 
-/* .cardview1 {
+.cardview1 {
     flex: auto;
     max-width: 100%;
     box-sizing: border-box;
@@ -432,7 +432,7 @@
 .logo-card img {
     background-color: white;
     color: white;
-} */
+}
 
 /* CARDVIEW */
 
