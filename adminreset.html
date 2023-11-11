@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Reset</title>
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="/css/adminreset.css">
+
+    <!-- Icon Title Link -->
+    <link rel="Icon" href="/image/Cooking_recipe.png" type="image/x-icon">
+
+    <!-- Font Awesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+</head>
+<body>
+    
+	<div class="container">
+		<div class="login-content">
+			<form id="resetadminForm" class="login-form">
+				<img src="/image/Cooking_recipe.png">
+				<h2 class="title">Reset Password!</h2>
+                <div class="input-div email">
+                    <div class="i"> 
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Old Email</h5>
+                        <input type="email" id="email" class="input" required>
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5> New Username (optional)</h5>
+                        <input type="text" id="name" class="input" required>
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i"> 
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>New Password (optional)</h5>
+                        <input type="password" id="newPassword" class="input" required>
+                    </div>
+                </div>
+                <input type="submit" class="btn" value="Reset">
+                <input type="submit" class="btn" value="Logout" onclick="logout()">
+            </form>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/effect.js"></script>
+    <script>
+        // Cek status login saat halaman adminpanel.html dimuat
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // Pengguna sudah login, lanjutkan ke halaman adminpanel.html
+                console.log('User is logged in');
+            } else {
+                // Pengguna belum login, arahkan ke halaman adminlogin.html
+                console.log('User is not logged in, redirecting to adminlogin.html');
+                window.location.href = 'adminlogin.html';
+            }
+        });
+    </script>
+</body>
+</html>

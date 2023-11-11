@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Category </title>
+<!-- CSS Link  -->
+<link rel="stylesheet" href="/css/adminusers.css">
+
+<!-- Icon Title Link -->
+<link rel="Icon" href="/image/Cooking_recipe.png" type="image/x-icon">
+
+<!-- Font Awesome CDN Link -->
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@500&family=Poppins&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <div class="header">
+            <div class="list-item">
+                <a href="#">
+                    <img src="/image/Cooking_recipe_small.svg" alt="" class="icon">
+                    <span class="description-header">Cooking Recipe</span>
+                </a>
+            </div>
+
+            <div class="illustration">
+                <img src="/image/bg2.svg" alt="">
+            </div>
+
+            
+        </div>
+        <div class="main">
+            <div class="list-item">
+                <a href="adminpanel.html">
+                    <img src="/icon/dashboard.svg" alt="" class="icon">
+                    <span class="description">Dashboard</span>
+                </a>
+            </div>
+            <div class="list-item">
+                <a href="#">
+                    <img src="/icon/category.svg" alt="" class="icon">
+                    <span class="description">Category</span>
+                </a>
+            </div>
+            <div class="list-item">
+                <a href="adminsubcategory.html">
+                    <img src="/icon/subcategory.svg" alt="" class="icon">
+                    <span class="description">Subcategory</span>
+                </a>
+            </div>
+            <div class="list-item">
+                <a href="admincreator.html">
+                    <img src="/icon/recipe_creator.svg" alt="" class="icon">
+                    <span class="description">Recipe Creator</span>
+                </a>
+            </div>
+
+            <!-- INI KODE BARU -->
+            <div class="list-item">
+                <a href="adminusers.html">
+                    <img src="/icon/users.svg" alt="" class="icon">
+                    <span class="description">Users</span>
+                </a>
+            </div>
+            <!-- INI KODE BARU -->
+            
+            <div class="list-item">
+                <a href="adminposts.html">
+                    <img src="/icon/post.svg" alt="" class="icon">
+                    <span class="description">Post</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="div-topbar">
+            <div id="menu-button">
+                <input type="checkbox" id="menu-checkbox">
+                <label for="menu-checkbox" id="menu-label">
+                    <div id="hamburger"></div>
+                </label>
+            </div>
+            <h2>Hi, <span id="userName">Admin</span></h2>
+        </div>
+        <div class="form-add-data">
+            <h3>Users</h3>
+        </div>
+
+        <div class="table">
+            <table id="categoryTable">
+                <tr>
+                    <th>UID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Tambahkan elemen modal untuk mengedit -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span> <!-- Tambahkan elemen span dengan kelas "close" dan isi "&times;" untuk tombol silang -->
+        <h3>Edit Category</h3>
+        <input type="text" id="editId_Category" placeholder="ID" required><br>
+        <input type="text" id="editName" placeholder="Name" required><br>
+        <textarea id="editCategoryDescription" placeholder="Description" required></textarea><br>
+        <button id="saveEditButton">Save</button>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/effect2.js"></script>
+<script src="/js/adminusers.js"></script>
+<script>
+    // Mendapatkan data pengguna dari Realtime Database
+    firebase.auth().onAuthStateChanged((admins) => {
+        if (admins) {
+            const adminsId = admins.uid;
+            const adminsRef = firebase.database().ref('admins/' + adminsId);
+            adminsRef.once('value', (snapshot) => {
+                const adminsData = snapshot.val();
+                document.getElementById('userName').textContent = adminsData.name;
+            });
+        }
+    });
+
+    // Cek status login saat halaman adminpanel.html dimuat
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // Pengguna sudah login, lanjutkan ke halaman adminpanel.html
+            console.log('User is logged in');
+        } else {
+            // Pengguna belum login, arahkan ke halaman adminlogin.html
+            console.log('User is not logged in, redirecting to adminlogin.html');
+            window.location.href = 'adminlogin.html';
+        }
+    });
+</script>
+</body>
+</html>
